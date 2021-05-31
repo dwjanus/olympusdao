@@ -15,6 +15,7 @@ import { loadAppDetails } from './actions/App.actions.js';
 import { loadAccountDetails } from './actions/Account.actions.js';
 
 import Stake from "./components/Stake";
+import Bond from "./components/Bond";
 import ChooseBond from "./components/ChooseBond";
 
 import "./App.css";
@@ -22,7 +23,7 @@ import "./style.scss";
 import { Header, ThemeSwitch, } from "./components";
 
 import Sidebar from "./components/Sidebar";
-import { DAI_ABI, DAI_ADDRESS, INFURA_ID, NETWORK, NETWORKS } from "./constants";
+import { DAI_ABI, DAI_ADDRESS, INFURA_ID, NETWORK, NETWORKS, BONDS } from "./constants";
 import { Transactor } from "./helpers";
 import {
   useBalance,
@@ -223,9 +224,18 @@ function App(props: any) {
               <Route exact path="/">
                 <Stake address={address} provider={injectedProvider} />
               </Route>
+
               <Route exact path="/choose_bond">
-                <ChooseBond address={address} provider={injectedProvider}/>
+                <ChooseBond />
               </Route>
+
+              {Object.values(BONDS).map(bond => {
+                return <Route exact key={bond} path={`/bonds/${bond}`}>
+                  <Bond bond={bond} address={address} provider={injectedProvider} />
+                </Route>
+              })}
+
+
             </Switch>
 
 

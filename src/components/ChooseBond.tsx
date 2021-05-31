@@ -3,13 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { trim } from "../helpers";
 import Bond from "./Bond";
 import BondDai from "./BondDai";
+import { Link } from "react-router-dom"
 
-type Props = {
-  provider: any,
-  address: string
-};
 
-function ChooseBond({ provider, address }: Props) {
+function ChooseBond() {
 	const dispatch = useDispatch();
 
 	const [view, setView] = useState("choose");
@@ -33,9 +30,9 @@ function ChooseBond({ provider, address }: Props) {
 									<i className="fa fa-chevron-left"></i>
 									Back
 								</div>
-								{
+								{/* {
 									view === "bond" ? <Bond address={address} provider={provider}/> : <BondDai address={address} provider={provider} />
-								}
+								} */}
 							</div>
 						)
 					}
@@ -116,13 +113,11 @@ function ChooseBond({ provider, address }: Props) {
 										</div>
 
 										<div className="col">
-											{/* this was originally a link to bodai, it should just render the bondai component instead */}
-											<button 
-												onClick={() => setView("bondDai")}
-													className="ohm-button button float-right"
-												>
-												View
-											</button>
+											<Link to="/bonds/dai">
+												<button className="ohm-button button float-right">
+													View
+												</button>
+											</Link>
 										</div>
 									</li>
 								</ul>
