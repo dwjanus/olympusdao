@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect, } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { trim } from "../helpers";
-import Bond from "./Bond";
-import BondDai from "./BondDai";
 import { Link } from "react-router-dom"
 
 
@@ -23,20 +21,7 @@ function ChooseBond() {
 			<div className="dapp-center-modal d-flex flex-column ohm-card">
 				<div className="py-4 px-4 py-md-4 px-md-4">
 
-					{
-						view !== "choose" && (
-							<div>
-								<div onClick={() => setView("choose")}>
-									<i className="fa fa-chevron-left"></i>
-									Back
-								</div>
-								{/* {
-									view === "bond" ? <Bond address={address} provider={provider}/> : <BondDai address={address} provider={provider} />
-								} */}
-							</div>
-						)
-					}
-					
+									
 					{ view === "choose" &&
 						(
 							<div>
@@ -81,13 +66,11 @@ function ChooseBond() {
 										</div>
 
 										<div className="col">
-											{/* this was originally a link, it should just render the slp bond component instead */}
-											<button 
-												className="ohm-button button float-right"
-												onClick={() => setView("bond")}
-											>
-												View
-											</button>
+											<Link to="/bonds/ohm_dai_lp">
+												<button className="ohm-button button float-right">
+													View
+												</button>
+											</Link>
 										</div>
 									</li>
 
@@ -124,14 +107,10 @@ function ChooseBond() {
 							</div>
 						)
 					}
-        	
-
 				</div>	
 			</div>
     </div>
   );
 }
-
-
 
 export default ChooseBond;

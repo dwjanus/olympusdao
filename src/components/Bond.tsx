@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { trim, getRebaseBlock, secondsUntilBlock, prettifySeconds, prettyVestingPeriod } from "../helpers";
 import { changeApproval, calcBondDetails, calculateUserBondDetails } from '../actions/Bond.actions.js';
 import { BONDS } from "../constants";
@@ -85,31 +86,81 @@ function Bond({ provider, address, bond }: Props) {
     return stakeAllowance > 0;
   }, [stakeAllowance]);
 
+  const tokenImage = () => {
+    if (bond == "ohm_frax_lp") {
+      return (
+        <>
+        <div className="ohm-pair" style={{zIndex: 2}}>
+          <img
+            src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x383518188C0C6d7730D91b2c03a03C837814a899/logo.png"
+          />
+        </div>
+
+        <div className="ohm-pair" style={{zIndex: 1}}>
+          <img
+            src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x853d955aCEf822Db058eb8505911ED77F175b99e/logo.png"
+          />
+        </div>
+        </>  
+      )
+    } else if (bond == "frax") {
+      return (
+        <div className="ohm-pair" style={{zIndex: 1}}>
+          <img
+            src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x853d955aCEf822Db058eb8505911ED77F175b99e/logo.png"
+          />
+        </div>
+      )
+    } else if (bond == "dai") {
+      return (
+        <div className="ohm-pair" style={{zIndex: 1}}>
+					<img src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png" />
+				</div>
+      )
+    } else {
+      return (
+        <>
+        <div className="ohm-pair" style={{zIndex: 2}}>
+          <img
+            src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x383518188C0C6d7730D91b2c03a03C837814a899/logo.png"
+          />
+        </div>
+
+        <div className="ohm-pair" style={{zIndex: 1}}>
+          <img
+            src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png"
+          />
+        </div>
+        </>  
+      )
+    }
+  }
+
 
   return (
     <div className="d-flex align-items-center justify-content-center min-vh-100">
       <div className="dapp-center-modal flex-column">
         <div className="d-flex flex-row align-items-center my-2 px-2 my-md-4 px-md-4">
+          <div>
+            <Link to="/choose_bond">
+              <i className="fa fa-chevron-left"></i>
+              Back
+            </Link>
+          </div>
           <div className="d-flex flex-row col justify-content-center">
             <div className="ohm-pairs d-sm-flex mr-2 d-none">
-              <div className="ohm-pair" style={{zIndex: 2}}>
-                <img
-                  src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x383518188C0C6d7730D91b2c03a03C837814a899/logo.png"
-                />
-              </div>
-
-              <div className="ohm-pair" style={{zIndex: 1}}>
-                <img
-                  src="https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/ethereum/assets/0x853d955aCEf822Db058eb8505911ED77F175b99e/logo.png"
-                />
-              </div>
+            { tokenImage() }
             </div>
 
             <div className="text-light align-self-center">
               <h3>
-                OHM-DAI SLP Bond
+                { bond == "ohm_dai_lp" && "OHM-DAI SLP Bond" }
+                { bond == "dai" && "DAI Bond" }
+                { bond == "ohm_frax_lp" && "OHM-FRAX LP Bond"}
+                { bond == "frax" && "FRAX Bond" }
               </h3>
             </div>
+            
           </div>
         </div>
 
