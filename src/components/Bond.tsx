@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { trim, getRebaseBlock, secondsUntilBlock, prettifySeconds, prettyVestingPeriod } from "../helpers";
 import { changeApproval, calcBondDetails, calculateUserBondDetails } from '../actions/Bond.actions.js';
 import { BONDS } from "../constants";
@@ -140,9 +141,14 @@ function Bond({ provider, address, bond }: Props) {
     <div className="d-flex align-items-center justify-content-center min-vh-100">
       <div className="dapp-center-modal flex-column">
         <div className="d-flex flex-row align-items-center my-2 px-2 my-md-4 px-md-4">
+          <div>
+            <Link to="/choose_bond">
+              <i className="fa fa-chevron-left"></i>
+              Back
+            </Link>
+          </div>
           <div className="d-flex flex-row col justify-content-center">
             <div className="ohm-pairs d-sm-flex mr-2 d-none">
-
             { tokenImage() }
             </div>
 
