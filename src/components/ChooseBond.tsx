@@ -81,13 +81,11 @@ function ChooseBond() {
 										</div>
 
 										<div className="col">
-											{/* this was originally a link, it should just render the slp bond component instead */}
-											<button 
-												className="ohm-button button float-right"
-												onClick={() => setView("bond")}
-											>
-												View
-											</button>
+											<Link to="/bonds/ohm_dai_lp">
+												<button className="ohm-button button float-right">
+													View
+												</button>
+											</Link>
 										</div>
 									</li>
 
